@@ -40,7 +40,7 @@ ROUTING_KEY = getattr(settings, 'ACE_ROUTING_KEY', None)
 
 
 @task(base=LoggedTask)
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def update_discussions_map(context):
     """
     Updates the mapping between discussion_id to discussion block usage key
@@ -63,7 +63,7 @@ class ResponseNotification(BaseMessageType):
 
 
 @task(base=LoggedTask, routing_key=ROUTING_KEY)
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def send_ace_message(context):
     context['course_id'] = CourseKey.from_string(context['course_id'])
 

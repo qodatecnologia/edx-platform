@@ -43,7 +43,7 @@ COURSE_NEXT_SECTION_UPDATE_LOG_PREFIX = 'Course Next Section Update'
 
 
 @task(base=LoggedPersistOnFailureTask, bind=True, default_retry_delay=30)
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def update_course_schedules(self, **kwargs):
     course_key = CourseKey.from_string(kwargs['course_id'])
     new_start_date = deserialize(kwargs['new_start_date_str'])
@@ -145,7 +145,7 @@ class BinnedScheduleMessageBaseTask(ScheduleMessageBaseTask):
 
 
 @task(base=LoggedTask, ignore_result=True, routing_key=ROUTING_KEY)
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def _recurring_nudge_schedule_send(site_id, msg_str):
     _schedule_send(
         msg_str,
@@ -156,7 +156,7 @@ def _recurring_nudge_schedule_send(site_id, msg_str):
 
 
 @task(base=LoggedTask, ignore_result=True, routing_key=ROUTING_KEY)
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def _upgrade_reminder_schedule_send(site_id, msg_str):
     _schedule_send(
         msg_str,
@@ -167,7 +167,7 @@ def _upgrade_reminder_schedule_send(site_id, msg_str):
 
 
 @task(base=LoggedTask, ignore_result=True, routing_key=ROUTING_KEY)
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def _course_update_schedule_send(site_id, msg_str):
     _schedule_send(
         msg_str,

@@ -75,7 +75,7 @@ class BaseSoftwareSecureTask(Task):
 
 
 @task(routing_key=ACE_ROUTING_KEY)
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def send_verification_status_email(context):
     """
     Spins a task to send verification status email to the learner
@@ -103,7 +103,7 @@ def send_verification_status_email(context):
     max_retries=settings.SOFTWARE_SECURE_RETRY_MAX_ATTEMPTS,
     routing_key=SOFTWARE_SECURE_VERIFICATION_ROUTING_KEY,
 )
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def send_request_to_ss_for_user(self, user_verification_id, copy_id_photo_from):
     """
     Assembles a submission to Software Secure.

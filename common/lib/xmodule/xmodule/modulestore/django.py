@@ -146,7 +146,7 @@ class SignalHandler(object):
         def listen_for_course_publish(sender, course_key, **kwargs):
             do_my_expensive_update.delay(course_key)
 
-        @set_code_owner_attribute(__name__)
+        @set_code_owner_attribute
         @task()
         def do_my_expensive_update(course_key):
             # ...

@@ -32,7 +32,7 @@ class MetadataParseError(Exception):
 
 
 @task(name='third_party_auth.fetch_saml_metadata')
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def fetch_saml_metadata():
     """
     Fetch and store/update the metadata of all IdPs

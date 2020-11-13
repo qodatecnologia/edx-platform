@@ -19,7 +19,7 @@ log = logging.getLogger(__name__)
 
 
 @task()
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def task_evaluate_subsection_completion_milestones(course_id, block_id, user_id):
     """
     Updates users' milestones related to completion of a subsection.

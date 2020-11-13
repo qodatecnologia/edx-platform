@@ -21,7 +21,7 @@ log = logging.getLogger('edx.celery.task')
 
 
 @task(bind=True, name='student.send_activation_email')
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def send_activation_email(self, msg_string, from_address=None):
     """
     Sending an activation email to the user.

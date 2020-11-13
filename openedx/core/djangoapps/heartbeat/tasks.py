@@ -9,6 +9,6 @@ from edx_django_utils.monitoring import set_code_owner_attribute
 
 
 @task(routing_key=settings.HEARTBEAT_CELERY_ROUTING_KEY)
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def sample_task():
     return True

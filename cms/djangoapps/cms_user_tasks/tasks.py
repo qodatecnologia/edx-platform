@@ -20,7 +20,7 @@ TASK_COMPLETE_EMAIL_TIMEOUT = 60
 
 
 @task(bind=True)
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def send_task_complete_email(self, task_name, task_state_text, dest_addr, detail_url):
     """
     Sending an email to the users when an async task completes.

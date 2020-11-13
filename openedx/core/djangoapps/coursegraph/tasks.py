@@ -248,7 +248,7 @@ def should_dump_course(course_key, graph):
 
 
 @task(routing_key=settings.COURSEGRAPH_JOB_QUEUE)
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def dump_course_to_neo4j(course_key_string, credentials):
     """
     Serializes a course and writes it to neo4j.

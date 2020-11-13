@@ -15,7 +15,7 @@ log = get_task_logger(__name__)
 
 
 @task(name='openedx.core.djangoapps.ccxcon.tasks.update_ccxcon')
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def update_ccxcon(course_id, cur_retry=0):
     """
     Pass through function to update course information on CCXCon.

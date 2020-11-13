@@ -21,7 +21,7 @@ LOGGER = get_task_logger(__name__)
 
 
 @task(default_retry_delay=settings.CREDIT_TASK_DEFAULT_RETRY_DELAY, max_retries=settings.CREDIT_TASK_MAX_RETRIES)
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def update_credit_course_requirements(course_id):
     """
     Updates course requirements table for a course.

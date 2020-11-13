@@ -146,7 +146,7 @@ def _update_xblocks_cache(course_key):
 
 
 @task(name=u'openedx.core.djangoapps.bookmarks.tasks.update_xblocks_cache')
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def update_xblocks_cache(course_id):
     """
     Update the XBlocks cache for a course.

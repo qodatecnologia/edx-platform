@@ -26,7 +26,7 @@ MAX_RETRIES = 11
     routing_key=ROUTING_KEY,
     name='entitlements.expire_old_entitlements',
 )
-@set_code_owner_attribute(__name__)
+@set_code_owner_attribute
 def expire_old_entitlements(self, start, end, logid='...'):
     """
     This task is designed to be called to process a bundle of entitlements

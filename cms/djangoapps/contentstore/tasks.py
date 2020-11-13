@@ -22,6 +22,7 @@ from django.core.files import File
 from django.test import RequestFactory
 from django.utils.text import get_valid_filename
 from django.utils.translation import ugettext as _
+from edx_django_utils.monitoring import set_code_owner_attribute
 from opaque_keys.edx.keys import CourseKey
 from opaque_keys.edx.locator import LibraryLocator
 from organizations.models import OrganizationCourse
@@ -83,6 +84,7 @@ def clone_instance(instance, field_values):
 
 
 @task()
+@set_code_owner_attribute(__name__)
 def rerun_course(source_course_key_string, destination_course_key_string, user_id, fields=None):
     """
     Reruns a course in a new celery task.
@@ -169,6 +171,7 @@ def _parse_time(time_isoformat):
 
 
 @task(routing_key=settings.UPDATE_SEARCH_INDEX_JOB_QUEUE)
+@set_code_owner_attribute(__name__)
 def update_search_index(course_id, triggered_time_isoformat):
     """ Updates course search index. """
     try:
@@ -193,6 +196,7 @@ def update_search_index(course_id, triggered_time_isoformat):
 
 
 @task()
+@set_code_owner_attribute(__name__)
 def update_library_index(library_id, triggered_time_isoformat):
     """ Updates course search index. """
     try:
@@ -238,6 +242,7 @@ class CourseExportTask(UserTask):  # pylint: disable=abstract-method
 
 
 @task(base=CourseExportTask, bind=True)
+@set_code_owner_attribute(__name__)
 def export_olx(self, user_id, course_key_string, language):
     """
     Export a course or library to an OLX .tar.gz archive and prepare it for download.
@@ -370,6 +375,7 @@ class CourseImportTask(UserTask):  # pylint: disable=abstract-method
 
 
 @task(base=CourseImportTask, bind=True)
+@set_code_owner_attribute(__name__)
 def import_olx(self, user_id, course_key_string, archive_path, archive_name, language):
     """
     Import a course or library from a provided OLX .tar.gz archive.

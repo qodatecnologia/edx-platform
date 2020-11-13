@@ -139,12 +139,14 @@ class SignalHandler(object):
 
         from django.dispatch import receiver
         from celery.task import task
+        from edx_django_utils.monitoring import set_code_owner_attribute
         from xmodule.modulestore.django import modulestore, SignalHandler
 
         @receiver(SignalHandler.course_published)
         def listen_for_course_publish(sender, course_key, **kwargs):
             do_my_expensive_update.delay(course_key)
 
+        @set_code_owner_attribute(__name__)
         @task()
         def do_my_expensive_update(course_key):
             # ...

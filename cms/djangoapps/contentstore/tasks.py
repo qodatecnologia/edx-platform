@@ -22,7 +22,7 @@ from django.core.files import File
 from django.test import RequestFactory
 from django.utils.text import get_valid_filename
 from django.utils.translation import ugettext as _
-from edx_django_utils.monitoring import set_code_owner_attribute
+from edx_django_utils.monitoring import set_code_owner_attribute, set_code_owner_attribute_from_module
 from opaque_keys.edx.keys import CourseKey
 from opaque_keys.edx.locator import LibraryLocator
 from organizations.models import OrganizationCourse
@@ -375,11 +375,13 @@ class CourseImportTask(UserTask):  # pylint: disable=abstract-method
 
 
 @task(base=CourseImportTask, bind=True)
-@set_code_owner_attribute
+# Note: The decorator @set_code_owner_attribute could not be used because
+#   the implementation of this task will break with any additional decorators.
 def import_olx(self, user_id, course_key_string, archive_path, archive_name, language):
     """
     Import a course or library from a provided OLX .tar.gz archive.
     """
+    set_code_owner_attribute_from_module(__name__)
     courselike_key = CourseKey.from_string(course_key_string)
     try:
         user = User.objects.get(pk=user_id)

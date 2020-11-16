@@ -5,7 +5,7 @@
 #    make upgrade
 #
 -e git+https://github.com/edx/acid-block.git@758855a67d2f12bd74db4d5e7a0862d6e65f079c#egg=acid-xblock  # via -r requirements/edx/github.in
--e git+https://github.com/edx/celery.git@946f1a48aabda3c0e934fd0b6558f623bb3f62b4#egg=celery
+-e git+https://github.com/edx/celery.git@iamsobanjaved/celery-logging#egg=celery
 -e common/lib/capa  # via -r requirements/edx/local.in
 -e git+https://github.com/edx/codejail.git@3.1.3#egg=codejail==3.1.3  # via -r requirements/edx/github.in
 -e git+https://github.com/edx/django-wiki.git@0.1.1#egg=django-wiki  # via -r requirements/edx/github.in

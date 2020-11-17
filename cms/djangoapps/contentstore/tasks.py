@@ -242,11 +242,13 @@ class CourseExportTask(UserTask):  # pylint: disable=abstract-method
 
 
 @task(base=CourseExportTask, bind=True)
-@set_code_owner_attribute
+# Note: The decorator @set_code_owner_attribute could not be used because
+#   the implementation of this task breaks with any additional decorators.
 def export_olx(self, user_id, course_key_string, language):
     """
     Export a course or library to an OLX .tar.gz archive and prepare it for download.
     """
+    set_code_owner_attribute_from_module(__name__)
     courselike_key = CourseKey.from_string(course_key_string)
 
     try:
@@ -376,7 +378,7 @@ class CourseImportTask(UserTask):  # pylint: disable=abstract-method
 
 @task(base=CourseImportTask, bind=True)
 # Note: The decorator @set_code_owner_attribute could not be used because
-#   the implementation of this task will break with any additional decorators.
+#   the implementation of this task breaks with any additional decorators.
 def import_olx(self, user_id, course_key_string, archive_path, archive_name, language):
     """
     Import a course or library from a provided OLX .tar.gz archive.
